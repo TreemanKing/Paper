@@ -1,0 +1,50 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: TreemanKing <67459602+TreemanKing@users.noreply.github.com>
+Date: Fri, 29 Sep 2023 02:35:46 +1000
+Subject: [PATCH] MapCreationEvent
+
+
+diff --git a/src/main/java/io/papermc/paper/event/player/MapCreationEvent.java b/src/main/java/io/papermc/paper/event/player/MapCreationEvent.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..b7cc9fea32a44e0e7f759e8c29e2b44914143df2
+--- /dev/null
++++ b/src/main/java/io/papermc/paper/event/player/MapCreationEvent.java
+@@ -0,0 +1,38 @@
++package io.papermc.paper.event.player;
++
++import org.bukkit.entity.Player;
++import org.bukkit.event.Cancellable;
++import org.bukkit.event.HandlerList;
++import org.bukkit.event.player.PlayerEvent;
++import org.jetbrains.annotations.NotNull;
++
++public class MapCreationEvent extends PlayerEvent implements Cancellable {
++
++    private static final HandlerList HANDLER_LIST = new HandlerList();
++    private boolean cancelled;
++
++    public MapCreationEvent(@NotNull Player player) {
++        super(player);
++    }
++
++    @Override
++    public boolean isCancelled() {
++        return cancelled;
++    }
++
++    @Override
++    public void setCancelled(boolean cancel) {
++        this.cancelled = cancel;
++    }
++
++    @NotNull
++    @Override
++    public HandlerList getHandlers() {
++        return HANDLER_LIST;
++    }
++
++    @NotNull
++    public static HandlerList getHandlerList() {
++        return HANDLER_LIST;
++    }
++}
